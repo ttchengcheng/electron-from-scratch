@@ -1,34 +1,65 @@
-var webpack = require('webpack');
+const webpack = require('webpack');
 
 module.exports = {
-  mode: 'development',
-  entry: './src/index.tsx',
-  module: {
-    rules: [
-      // tsx, jsx loader
+  "entry": "./src/index.tsx",
+  "module": {
+    "rules": [
       {
-        test: /\.(t|j)sx?$/,
-        use: {
-          loader: 'awesome-typescript-loader'
+        "test": /\.tsx?$/,
+        "enforce": "pre",
+        "use": [
+          {
+            "loader": "tslint-loader",
+            "options": {
+              "configFile": "./tslint.json",
+              "emitErrors": false,
+              "failOnHint": true,
+              "typeCheck": false,
+              "fix": false,
+              "tsConfigFile": "tsconfig.json"
+            }
+          }
+        ]
+      },
+      {
+        "test": /\.(t|j)sx?$/,
+        "use": {
+          "loader": "awesome-typescript-loader"
         }
       },
-      // add source-map support
       {
-        enforce: "pre",
-        test: /\.js$/,
-        loader: "source-map-loader"
+        "enforce": "pre",
+        "test": /\.js$/,
+        "loader": "source-map-loader"
+      },
+      {
+        "test": /\.css$/,
+        "use": [
+          {
+            "loader": "style-loader"
+          },
+          {
+            "loader": "css-loader"
+          }
+        ]
       }
     ]
   },
-  output: {
-    filename: './bundle.js',
+  "output": {
+    "filename": "./bundle.js"
   },
-  resolve: {
-    extensions: [".ts", ".tsx", ".js", ".jsx"]
+  "mode": "development",
+  "resolve": {
+    "extensions": [
+      ".ts",
+      ".tsx",
+      ".js",
+      ".jsx"
+    ]
   },
-  devtool: "source-map",
-  devServer: {
-    contentBase: '.',
-    historyApiFallback: true
+  "devtool": "source-map",
+  "devServer": {
+    "contentBase": ".",
+    "historyApiFallback": true
   }
-}
+};

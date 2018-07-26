@@ -1,43 +1,42 @@
-var webpack = require('webpack');
-var path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
-  mode: 'production',
   entry: './src/index.tsx',
   module: {
-    rules: [
-      // changed from { test: /\.jsx?$/, use: { loader: 'babel-loader' } },
-      {
+    rules: [{
         test: /\.(t|j)sx?$/,
         use: {
           loader: 'awesome-typescript-loader'
         }
       },
-      // {
-      //   test: /\.less$/,
-      //   loaders: ["style-loader", "css-loder", "less-loader"]
-      // },
-      // addition - add source-map support
       {
-        enforce: "pre",
+        enforce: 'pre',
         test: /\.js$/,
-        loader: "source-map-loader"
+        loader: 'source-map-loader'
+      },
+      {
+        test: /\.css$/,
+        use: [{
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
+          }
+        ]
       }
     ]
   },
   output: {
-    filename: './bundle.js',
+    filename: './bundle.js'
   },
+  mode: 'production',
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".jsx"]
+    extensions: [
+      '.ts',
+      '.tsx',
+      '.js',
+      '.jsx'
+    ]
   },
-  // externals: {
-  //   "react": "React",
-  //   "react-dom": "ReactDOM",
-  // },
-  devtool: "source-map",
-  // devServer: {
-  //   contentBase: parentDir,
-  //   historyApiFallback: true
-  // }
-}
+  devtool: 'source-map'
+};
