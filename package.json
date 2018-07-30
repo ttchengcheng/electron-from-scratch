@@ -5,10 +5,10 @@
   "main": "dist/main.js",
   "scripts": {
     "start": "electron .",
-    "build": "./node_modules/.bin/webpack --config ./webpack.config.electron.js",
-    "build-dev": "./node_modules/.bin/webpack --config ./webpack.config.electron.dev.js",
-    "build-web": "./node_modules/.bin/webpack --config ./webpack.config.dev.js",
-    "web": "./node_modules/.bin/webpack-dev-server --config ./webpack.config.dev.js",
+    "build": "webpack --config ./webpack.config.electron.js",
+    "build-dev": "webpack --config ./webpack.config.electron.dev.js",
+    "build-web": "webpack --config ./webpack.config.dev.js",
+    "web": "webpack-dev-server --config ./webpack.config.dev.js",
 
     "test": "echo \"Error: no test specified\" && exit 1"
   },
